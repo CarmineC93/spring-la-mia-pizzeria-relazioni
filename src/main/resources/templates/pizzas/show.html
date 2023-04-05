@@ -27,14 +27,39 @@
             </th:block>
 
             <dt>Price</dt>
-            <dd th:text="*{price}"></dd>
+            <dd th:text="|*{price} €|"></dd>
 
         </dl>
     </div>
 
+
+    <h6>Special Offer</h6>
+    <a th:href="@{/special-offers/create(pizzaId=${pizza.id})}"
+        class="btn btn-success">Add new Offer</a>
+
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Name offer</th>
+            <th scope="col">Start date</th>
+            <th scope="col">End date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="offer : *{specialOffers}" th:object="${offer}">
+            <td th:text="*{title}"></td>
+            <td th:text="${#temporals.format(offer.startDate, 'dd/MM/yyyy')}"></td>
+            <td th:text="${#temporals.format(offer.endDate, 'dd/MM/yyyy')}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+
     <div>
         <a th:href="@{/pizzas}"> Back to pizzas menu </a>
     </div>
+
 
 </div>
 

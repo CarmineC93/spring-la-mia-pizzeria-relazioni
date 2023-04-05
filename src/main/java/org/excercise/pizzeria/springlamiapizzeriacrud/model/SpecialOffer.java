@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
-@Table(name = "spacial_offers")
+@Table(name = "special_offers")
 public class SpecialOffer {
 
 //ATTRIBUTES / COLUMNS
@@ -65,4 +65,5 @@ public class SpecialOffer {
     public void setTitle(String title) {
         this.title = title;
     }
+
 }
