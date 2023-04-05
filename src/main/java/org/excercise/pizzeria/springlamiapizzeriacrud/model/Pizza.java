@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import java.math.BigDecimal;
 import java.security.PublicKey;
+import java.util.List;
 
 @Entity
 @Table(name = "pizzas")
@@ -26,12 +27,24 @@ public class Pizza {
     @Column(nullable = false)
     private BigDecimal price;
 
+    //RELATION
+    @OneToMany(mappedBy = "pizza")
+    private List<SpecialOffer> specialOffers;
+
     //CONTRUCTOR
     public Pizza(){
         super();
     }
 
     //GETTER & SETTER
+
+    public List<SpecialOffer> getSpecialOffers() {
+        return specialOffers;
+    }
+
+    public void setSpecialOffers(List<SpecialOffer> specialOffers) {
+        this.specialOffers = specialOffers;
+    }
 
     public Integer getId() {
         return id;
