@@ -16,6 +16,12 @@
           <li class="nav-item">
             <a class="nav-link" th:href="@{/pizzas} " th:classAppend="${current == 'pizzas'} ? active : not-active">Pizzas</a>
           </li>
+
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/ingredients}"
+               th:classAppend="${current == 'ingredients'} ? active : not-active">Ingredients</a>
+          </li>
+
         </ul>
 
         <!--con il form farà una richiesta get a rotta pizzas, assocerà l'attribute name e ricaricherà la pagina-->

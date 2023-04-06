@@ -37,7 +37,7 @@ public class Pizza {
             name = "pizza_ingredient",
             joinColumns = @JoinColumn(name = "pizza_id"),
             inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
-    private Set<Ingredient> ingredients;
+    private List<Ingredient> ingredients;
 
 
     //CONTRUCTOR
@@ -47,11 +47,11 @@ public class Pizza {
 
     //GETTER & SETTER
 
-    public Set<Ingredient> getIngredients() {
+    public List<Ingredient> getIngredients() {
         return ingredients;
     }
 
-    public void setIngredients(Set<Ingredient> ingredients) {
+    public void setIngredients(List<Ingredient> ingredients) {
         this.ingredients = ingredients;
     }
 
