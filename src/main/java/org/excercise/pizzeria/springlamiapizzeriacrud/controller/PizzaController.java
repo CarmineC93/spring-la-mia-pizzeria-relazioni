@@ -102,9 +102,11 @@ public class PizzaController {
 
 
         @PostMapping("/create")
-        public String doCreate(@Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult br, RedirectAttributes redirectAttributes){
+        public String doCreate(@Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult br, RedirectAttributes redirectAttributes, Model model){
 
             if(br.hasErrors()){
+                //per far lasciare i campi selezionati in caso di altri campi con errore e ricaricamento pagina
+                model.addAttribute("ingredientList", ingredientService.getAll());
                 return "/pizzas/create";
             }
 
@@ -130,6 +132,8 @@ public class PizzaController {
             try {
                 Pizza pizza = pizzaService.getById(id);
                 model.addAttribute("pizza", pizza);
+                model.addAttribute("ingredientList", ingredientService.getAll());
+
                 return "/pizzas/edit";
             } catch (PizzaNotFoundException e) {
                 throw new ResponseStatusException(HttpStatus.NOT_FOUND, "pizza with id " + id + " not found");
@@ -137,13 +141,16 @@ public class PizzaController {
         }
 
         @PostMapping("/edit/{id}")
-        public String doEdit(@PathVariable Integer id, @Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult bs, RedirectAttributes redirectAttributes){
+        public String doEdit(@PathVariable Integer id, @Valid @ModelAttribute("pizza") Pizza formPizza, BindingResult bs, RedirectAttributes redirectAttributes, Model model){
             if(bs.hasErrors()){
+                model.addAttribute("ingredientList", ingredientService.getAll());
                 return "/pizzas/edit";
             }
             try{
                 Pizza updatedPizza = pizzaService.updatePizza(formPizza, id);
                 redirectAttributes.addFlashAttribute("message", new CrudMessage(CrudMessage.CrudMessageType.SUCCESS, "Pizza " + id + " successfully updated"));
+
+
 
                 return "redirect:/pizzas/" + Integer.toString(updatedPizza.getId());
             }catch(PizzaNotFoundException e){
