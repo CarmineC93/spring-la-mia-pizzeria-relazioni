@@ -39,9 +39,8 @@
       </div>
     </div>
 
-
     <!-- Price -->
-    <div class="col-3">
+    <div class="col-6">
       <label class="form-label" for="price">Price</label>
       <input type="number" min="1" step="any" id="price" class="form-control" th:field="*{price}"
              th:errorClass="is-invalid">
@@ -49,6 +48,16 @@
         <ul>
           <li th:each="err : ${#fields.errors('price')}" th:text="${err}"></li>
         </ul>
+      </div>
+    </div>
+
+    <!-- Ingredients -->
+    <div class="col-12">
+      <h4>Ingredients</h4>
+      <div class="form-check" th:each="ingredient : ${ingredientList}">
+        <input class="form-check-input" type="checkbox" th:value="${ingredient.id}"
+               th:id="|ingredient_${ingredient.id}|" th:field="*{ingredients}">
+        <label class="form-check-label" th:for="|ingredient_${ingredient.id}|" th:text="${ingredient.name}"></label>
       </div>
     </div>
 

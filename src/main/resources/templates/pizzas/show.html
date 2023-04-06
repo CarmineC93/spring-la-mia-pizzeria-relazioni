@@ -29,6 +29,8 @@
             <dt>Price</dt>
             <dd th:text="|*{price} €|"></dd>
 
+            <dt>Ingredients</dt>
+            <dd><span th:each="ingredient : *{ingredients}" th:text="${ingredient.name}" class="me-1"></span></dd>
         </dl>
     </div>
 

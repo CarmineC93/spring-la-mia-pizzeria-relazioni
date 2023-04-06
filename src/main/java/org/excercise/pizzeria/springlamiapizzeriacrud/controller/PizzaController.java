@@ -5,6 +5,7 @@ import org.excercise.pizzeria.springlamiapizzeriacrud.exceptions.PizzaNotFoundEx
 import org.excercise.pizzeria.springlamiapizzeriacrud.model.CrudMessage;
 import org.excercise.pizzeria.springlamiapizzeriacrud.model.Pizza;
 import org.excercise.pizzeria.springlamiapizzeriacrud.repository.PizzaRepository;
+import org.excercise.pizzeria.springlamiapizzeriacrud.service.IngredientService;
 import org.excercise.pizzeria.springlamiapizzeriacrud.service.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
@@ -29,6 +30,10 @@ public class PizzaController {
 
         @Autowired
         private PizzaService pizzaService;
+
+        @Autowired
+        private IngredientService ingredientService;
+
 
         /* //uso Option perchè il parametro potrà esserci come non esserci
         public String index(Model model, @RequestParam(name = "q") Optional<String> keyword) {
@@ -90,6 +95,8 @@ public class PizzaController {
         @GetMapping("/create")
         public String create(Model model){
             model.addAttribute("pizza", new Pizza());
+            //associo al model di pizza un attributo ListaIngredienti con tutti gli ingredienti presi dal metodo nell service
+            model.addAttribute("ingredientList", ingredientService.getAll());
             return "/pizzas/create";
         }
 
